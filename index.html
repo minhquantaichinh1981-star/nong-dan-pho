@@ -3,389 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng Ký Khóa Học - Nấm Phố</title>
+  <title>Thông Báo Đóng Đăng Ký Khóa Học</title>
+  
+  <!-- Font Google Inter thanh lịch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --primary: #003E99;    /* 60% Chủ đạo */
-      --bg: #F8FAFC;         /* 30% Nền & đệm */
-      --accent: #FF7A00;     /* 10% Điểm nhấn CTA */
-      --text: #0F172A;
-      --text-muted: #64748B;
-      --white: #FFFFFF;
-      --border: #E2E8F0;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 60px; }
-    
-    /* Header */
-    header {
-      background-color: var(--primary);
-      color: var(--white);
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #e2e8f0 100%);
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      max-width: 620px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 44px 36px;
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
       text-align: center;
-      padding: 36px 20px;
+      position: relative;
+      overflow: hidden;
     }
-    header h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
-    header p { font-size: 15px; opacity: 0.9; }
 
-    /* Form Container */
-    .container {
-      max-width: 580px;
-      margin: -24px auto 0;
-      background: var(--white);
-      border-radius: 16px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-      padding: 28px;
-      border: 1px solid var(--border);
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #16a34a, #22c55e);
     }
-    
-    .section-title {
-      font-size: 16px;
+
+    .badge-icon {
+      width: 72px;
+      height: 72px;
+      background-color: #dcfce7;
+      color: #15803d;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .badge-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke-width: 2.2;
+    }
+
+    .status-tag {
+      display: inline-block;
+      background-color: #fee2e2;
+      color: #b91c1c;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 24px;
       font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 20px;
     }
 
-    /* Option Cards */
-    .combo-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
-    .combo-card {
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      cursor: pointer;
+    .message {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #475569;
+      margin-bottom: 32px;
+      text-align: justify;
+      text-justify: inter-word;
+      background: #f8fafc;
+      padding: 20px 24px;
+      border-radius: 12px;
+      border-left: 4px solid #16a34a;
+    }
+
+    .contact-box {
+      font-size: 14px;
+      color: #64748b;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 24px;
+    }
+
+    .contact-box a {
+      color: #16a34a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-group {
+      margin-top: 20px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
       transition: all 0.2s ease;
     }
-    .combo-card:hover { border-color: #94A3B8; }
-    .combo-card.active {
-      border-color: var(--primary);
-      background-color: #EFF6FF;
-    }
-    .combo-info { display: flex; flex-direction: column; gap: 4px; }
-    .combo-title { font-size: 14px; font-weight: 600; }
-    .combo-price { font-size: 15px; font-weight: 700; color: var(--accent); }
-    
-    /* Form Inputs */
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-    .form-group input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-    .form-group input:focus { border-color: var(--primary); }
-    .hidden { display: none !important; }
 
-    /* Màn hình thông báo đủ sĩ số */
-    .closed-notice {
-      text-align: center;
-      padding: 20px 10px;
-    }
-    .closed-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    .closed-title {
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 14px;
-    }
-    .closed-text {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--text);
-      background-color: #F1F5F9;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px dashed #CBD5E1;
+    .btn-primary {
+      background-color: #16a34a;
+      color: #ffffff;
     }
 
-    /* Button */
-    .btn-submit {
-      width: 100%;
-      background-color: var(--accent);
-      color: var(--white);
-      border: none;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-      margin-top: 10px;
+    .btn-primary:hover {
+      background-color: #15803d;
     }
-    .btn-submit:hover { opacity: 0.92; }
-    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    /* Modal VietQR */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      z-index: 999;
-    }
-    .modal-box {
-      background: var(--white);
-      border-radius: 16px;
-      max-width: 440px;
-      width: 100%;
-      padding: 24px;
-      text-align: center;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    .qr-img { width: 100%; max-width: 280px; margin: 16px auto; display: block; border-radius: 8px; border: 1px solid var(--border); }
-    .payment-details {
-      background: var(--bg);
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 13px;
-      text-align: left;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .btn-done {
-      width: 100%;
-      background-color: var(--primary);
-      color: var(--white);
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
+    @media (max-width: 480px) {
+      .card {
+        padding: 32px 20px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      .message {
+        font-size: 15px;
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Nấm Phố: Tự Chủ Vườn Nấm Sạch Tại Nhà</h1>
-    <p>Giải pháp tự trồng & thực hành nấm dược liệu chuẩn sinh học</p>
-  </header>
-
-  <div class="container">
-    <!-- KHU VỰC THÔNG BÁO KHI ĐÃ HẾT HẠN (Mặc định ẩn) -->
-    <div id="closedContainer" class="closed-notice hidden">
-      <div class="closed-icon">🌱</div>
-      <div class="closed-title">Lớp Học Đã Đủ Số Lượng</div>
-      <div class="closed-text">
-        Cảm ơn quý cô chú và anh chị đã cùng Nấm Phố mang mầm xanh vào không gian đô thị. Hiện lớp học đã đủ số lượng để đảm bảo tương tác tốt nhất. Rất mong được đồng hành cùng cô chú và anh chị trong khóa sau.
-      </div>
+  <div class="card">
+    <!-- Icon Hoàn tất / Khóa -->
+    <div class="badge-icon">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
     </div>
 
-    <!-- KHU VỰC FORM ĐĂNG KÝ CHÍNH -->
-    <div id="formContent">
-      <div class="section-title">1. Chọn combo học tập</div>
-      <div class="combo-group">
-        <div class="combo-card active" onclick="selectCombo(1, 350000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà (không combo thực hành)')">
-          <div class="combo-info">
-            <div class="combo-title">Gói 1: Không combo thực hành</div>
-            <div class="combo-price">350.000 VNĐ</div>
-          </div>
-        </div>
-        <div class="combo-card" onclick="selectCombo(2, 600000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà và 1 lọ cao LC thực hành vang')">
-          <div class="combo-info">
-            <div class="combo-title">Gói 2: Kèm 1 lọ cao LC thực hành vang</div>
-            <div class="combo-price">600.000 VNĐ</div>
-          </div>
-        </div>
-      </div>
+    <div>
+      <span class="status-tag">Cổng đăng ký đã đóng</span>
+    </div>
 
-      <div class="section-title">2. Thông tin đăng ký</div>
-      <form id="regForm" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label>Họ và tên *</label>
-          <input type="text" id="hoTen" placeholder="Ví dụ: Trần Minh Mẫn" required>
-        </div>
+    <h1>Thông Báo Tạm Khép Lại Đăng Ký Khóa Học</h1>
 
-        <div class="form-group">
-          <label>Số điện thoại (Zalo nhận thông tin) *</label>
-          <input type="tel" id="soDienThoai" placeholder="Ví dụ: 0909099099" pattern="[0-9]{10}" required>
-        </div>
+    <!-- Nội dung thông điệp -->
+    <div class="message">
+      Trân trọng cảm ơn tình cảm của anh chị và các bạn. Do khóa học đã đủ thành viên cũng như để đảm bảo khóa học được diễn ra tốt nhất, Ban tổ chức xin phép được đóng link đăng ký và hẹn cô chú, anh chị và các bạn trong khóa sau!
+    </div>
 
-        <div class="form-group">
-          <label>Địa chỉ Email *</label>
-          <input type="email" id="email" placeholder="Ví dụ: tranminhman@gmail.com" required>
-        </div>
+    <!-- Tùy chọn nút liên hệ / kênh cập nhật -->
+    <div class="btn-group">
+      <!-- Thay đổi đường link Zalo/Facebook fanpage của bạn tại đây -->
+      <a href="https://zalo.me/" target="_blank" class="btn btn-primary">
+        Tham gia nhóm Zalo / Kênh thông báo khóa sau
+      </a>
+    </div>
 
-        <!-- Ẩn/Hiện linh hoạt theo combo -->
-        <div class="form-group hidden" id="groupDiaChi">
-          <label>Địa chỉ nhận mẫu thực hành (Gói 2) *</label>
-          <input type="text" id="diaChiGiaoHang" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
-        </div>
-
-        <button type="submit" class="btn-submit" id="submitBtn">ĐĂNG KÝ VÀ THANH TOÁN</button>
-      </form>
+    <div class="contact-box" style="margin-top: 24px;">
+      Mọi thắc mắc cần hỗ trợ, vui lòng liên hệ Ban tổ chức qua Hotline/Zalo hoặc Email hỗ trợ.
     </div>
   </div>
 
-  <!-- POPUP VIETQR -->
-  <div class="modal-overlay" id="qrModal">
-    <div class="modal-box">
-      <h3 style="color: var(--primary);">Quét mã để thanh toán</h3>
-      <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Mở App ngân hàng bất kỳ để quét mã QR</p>
-      
-      <img src="" alt="Mã VietQR" id="qrImage" class="qr-img">
-      
-      <div class="payment-details">
-        <div><strong>Ngân hàng:</strong> Techcombank (TCB)</div>
-        <div><strong>Số tài khoản:</strong> 19022423550011</div>
-        <div><strong>Chủ tài khoản:</strong> HỒ HOÀNG HIẾU</div>
-        <div><strong>Số tiền:</strong> <span id="txtGiaTien" style="color: var(--accent); font-weight: bold;"></span></div>
-        <div><strong>Nội dung CK:</strong> <span id="txtNoiDung" style="color: var(--primary); font-weight: bold;"></span></div>
-      </div>
-
-      <button class="btn-done" onclick="finishPayment()">TÔI ĐÃ CHUYỂN KHOẢN</button>
-    </div>
-  </div>
-
-  <script>
-    // URL Google Apps Script Web App
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0qJu_poVc06SGwFYm6q1uXoGZGbVeIVhrFKDjFh8TwDvi-rIDlDnUwSEJ3odmClBYKQ/exec";
-
-    // Thời điểm chốt sổ: 23:00:00 ngày 17/09/2026 (GMT+7)
-    const DEADLINE = new Date("2026-09-17T23:00:00+07:00").getTime();
-
-    // Hàm kiểm tra thời hạn đăng ký
-    function checkRegistrationDeadline() {
-      const now = new Date().getTime();
-      if (now >= DEADLINE) {
-        document.getElementById('formContent').classList.add('hidden');
-        document.getElementById('closedContainer').classList.remove('hidden');
-        return false;
-      }
-      return true;
-    }
-
-    // Chạy kiểm tra ngay khi mở trang
-    window.addEventListener('DOMContentLoaded', () => {
-      checkRegistrationDeadline();
-    });
-
-    let selectedCombo = {
-      id: 1,
-      name: "Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà (không combo thực hành)",
-      price: 350000
-    };
-
-    // Hàm chọn gói combo
-    function selectCombo(id, price, name) {
-      selectedCombo = { id, price, name };
-      const cards = document.querySelectorAll('.combo-card');
-      cards[0].classList.toggle('active', id === 1);
-      cards[1].classList.toggle('active', id === 2);
-
-      const groupDiaChi = document.getElementById('groupDiaChi');
-      const inputDiaChi = document.getElementById('diaChiGiaoHang');
-      if (id === 2) {
-        groupDiaChi.classList.remove('hidden');
-        inputDiaChi.setAttribute('required', 'required');
-      } else {
-        groupDiaChi.classList.add('hidden');
-        inputDiaChi.removeAttribute('required');
-      }
-    }
-
-    // Hàm bỏ dấu tiếng Việt chuẩn
-    function removeVietnameseTones(str) {
-      str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-      str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-      str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-      str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-      str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-      str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-      str = str.replace(/đ/g, "d");
-      return str;
-    }
-
-    // Tạo mã chuyển khoản: chữ cái đầu không dấu + SĐT (VD: tmm0909099099)
-    function generateTransferContent(fullName, phone) {
-      const cleanName = removeVietnameseTones(fullName.trim().toLowerCase());
-      const words = cleanName.split(/\s+/);
-      const initials = words.map(w => w.charAt(0)).join('');
-      return initials + phone.trim();
-    }
-
-    // Xử lý nộp form
-    async function handleSubmit(e) {
-      e.preventDefault();
-
-      // Kiểm tra chặn lại nếu khách bấm submit sau 23h
-      if (!checkRegistrationDeadline()) {
-        alert("Rất tiếc, thời hạn nhận học viên của khóa học đã kết thúc!");
-        return;
-      }
-
-      const submitBtn = document.getElementById('submitBtn');
-      submitBtn.disabled = true;
-      submitBtn.innerText = "Đang xử lý...";
-
-      const hoTen = document.getElementById('hoTen').value;
-      const soDienThoai = document.getElementById('soDienThoai').value;
-      const email = document.getElementById('email').value;
-      const diaChiGiaoHang = document.getElementById('diaChiGiaoHang').value;
-      
-      // Đọc mã CTV từ URL param ?ref=...
-      const urlParams = new URLSearchParams(window.location.search);
-      const maDoiTac = urlParams.get('ref') || "";
-
-      const noiDungCK = generateTransferContent(hoTen, soDienThoai);
-
-      const payload = {
-        hoTen,
-        soDienThoai,
-        email,
-        diaChiGiaoHang,
-        goiKhoaHoc: selectedCombo.name,
-        giaTien: selectedCombo.price,
-        noiDungCK,
-        maDoiTac
-      };
-
-      try {
-        fetch(SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const qrUrl = `https://img.vietqr.io/image/TCB-19022423550011-compact2.png?amount=${selectedCombo.price}&addInfo=${encodeURIComponent(noiDungCK)}&accountName=HO%20HOANG%20HIEU`;
-        
-        document.getElementById('qrImage').src = qrUrl;
-        document.getElementById('txtGiaTien').innerText = selectedCombo.price.toLocaleString('vi-VN') + " VNĐ";
-        document.getElementById('txtNoiDung').innerText = noiDungCK;
-
-        document.getElementById('qrModal').style.display = 'flex';
-      } catch (err) {
-        alert("Có lỗi xảy ra khi xử lý thông tin, vui lòng thử lại!");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerText = "ĐĂNG KÝ VÀ THANH TOÁN";
-      }
-    }
-
-    function finishPayment() {
-      alert("Cảm ơn bạn! Ban tổ chức sẽ kiểm tra giao dịch và gửi link lớp học qua Email & Zalo của bạn trong ít phút.");
-      document.getElementById('qrModal').style.display = 'none';
-      document.getElementById('regForm').reset();
-      selectCombo(1, 350000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà (không combo thực hành)');
-    }
-  </script>
 </body>
 </html>
