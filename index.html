@@ -83,7 +83,33 @@
       transition: border-color 0.2s ease;
     }
     .form-group input:focus { border-color: var(--primary); }
-    .hidden { display: none; }
+    .hidden { display: none !important; }
+
+    /* Màn hình thông báo đủ sĩ số */
+    .closed-notice {
+      text-align: center;
+      padding: 20px 10px;
+    }
+    .closed-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .closed-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+    .closed-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: #F1F5F9;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px dashed #CBD5E1;
+    }
 
     /* Button */
     .btn-submit {
@@ -153,47 +179,59 @@
   </header>
 
   <div class="container">
-    <div class="section-title">1. Chọn combo học tập</div>
-    <div class="combo-group">
-      <div class="combo-card active" onclick="selectCombo(1, 350000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà (không combo thực hành)')">
-        <div class="combo-info">
-          <div class="combo-title">Gói 1: Không combo thực hành</div>
-          <div class="combo-price">350.000 VNĐ</div>
-        </div>
-      </div>
-      <div class="combo-card" onclick="selectCombo(2, 600000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà và 1 lọ cao LC thực hành vang')">
-        <div class="combo-info">
-          <div class="combo-title">Gói 2: Kèm 1 lọ cao LC thực hành vang</div>
-          <div class="combo-price">600.000 VNĐ</div>
-        </div>
+    <!-- KHU VỰC THÔNG BÁO KHI ĐÃ HẾT HẠN (Mặc định ẩn) -->
+    <div id="closedContainer" class="closed-notice hidden">
+      <div class="closed-icon">🌱</div>
+      <div class="closed-title">Lớp Học Đã Đủ Số Lượng</div>
+      <div class="closed-text">
+        Cảm ơn quý cô chú và anh chị đã cùng Nấm Phố mang mầm xanh vào không gian đô thị. Hiện lớp học đã đủ số lượng để đảm bảo tương tác tốt nhất. Rất mong được đồng hành cùng cô chú và anh chị trong khóa sau.
       </div>
     </div>
 
-    <div class="section-title">2. Thông tin đăng ký</div>
-    <form id="regForm" onsubmit="handleSubmit(event)">
-      <div class="form-group">
-        <label>Họ và tên *</label>
-        <input type="text" id="hoTen" placeholder="Ví dụ: Trần Minh Mẫn" required>
+    <!-- KHU VỰC FORM ĐĂNG KÝ CHÍNH -->
+    <div id="formContent">
+      <div class="section-title">1. Chọn combo học tập</div>
+      <div class="combo-group">
+        <div class="combo-card active" onclick="selectCombo(1, 350000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà (không combo thực hành)')">
+          <div class="combo-info">
+            <div class="combo-title">Gói 1: Không combo thực hành</div>
+            <div class="combo-price">350.000 VNĐ</div>
+          </div>
+        </div>
+        <div class="combo-card" onclick="selectCombo(2, 600000, 'Nấm Phố: Tự Chủ Nấm Sạch Tại Nhà và 1 lọ cao LC thực hành vang')">
+          <div class="combo-info">
+            <div class="combo-title">Gói 2: Kèm 1 lọ cao LC thực hành vang</div>
+            <div class="combo-price">600.000 VNĐ</div>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Số điện thoại (Zalo nhận thông tin) *</label>
-        <input type="tel" id="soDienThoai" placeholder="Ví dụ: 0909099099" pattern="[0-9]{10}" required>
-      </div>
+      <div class="section-title">2. Thông tin đăng ký</div>
+      <form id="regForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Họ và tên *</label>
+          <input type="text" id="hoTen" placeholder="Ví dụ: Trần Minh Mẫn" required>
+        </div>
 
-      <div class="form-group">
-        <label>Địa chỉ Email *</label>
-        <input type="email" id="email" placeholder="Ví dụ: tranminhman@gmail.com" required>
-      </div>
+        <div class="form-group">
+          <label>Số điện thoại (Zalo nhận thông tin) *</label>
+          <input type="tel" id="soDienThoai" placeholder="Ví dụ: 0909099099" pattern="[0-9]{10}" required>
+        </div>
 
-      <!-- Ẩn/Hiện linh hoạt theo combo -->
-      <div class="form-group hidden" id="groupDiaChi">
-        <label>Địa chỉ nhận mẫu thực hành (Gói 2) *</label>
-        <input type="text" id="diaChiGiaoHang" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
-      </div>
+        <div class="form-group">
+          <label>Địa chỉ Email *</label>
+          <input type="email" id="email" placeholder="Ví dụ: tranminhman@gmail.com" required>
+        </div>
 
-      <button type="submit" class="btn-submit" id="submitBtn">ĐĂNG KÝ VÀ THANH TOÁN</button>
-    </form>
+        <!-- Ẩn/Hiện linh hoạt theo combo -->
+        <div class="form-group hidden" id="groupDiaChi">
+          <label>Địa chỉ nhận mẫu thực hành (Gói 2) *</label>
+          <input type="text" id="diaChiGiaoHang" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">ĐĂNG KÝ VÀ THANH TOÁN</button>
+      </form>
+    </div>
   </div>
 
   <!-- POPUP VIETQR -->
@@ -217,8 +255,27 @@
   </div>
 
   <script>
-    // URL Google Apps Script sau khi anh Deploy Web App
+    // URL Google Apps Script Web App
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0qJu_poVc06SGwFYm6q1uXoGZGbVeIVhrFKDjFh8TwDvi-rIDlDnUwSEJ3odmClBYKQ/exec";
+
+    // Thời điểm chốt sổ: 23:00:00 ngày 17/09/2026 (GMT+7)
+    const DEADLINE = new Date("2026-09-17T23:00:00+07:00").getTime();
+
+    // Hàm kiểm tra thời hạn đăng ký
+    function checkRegistrationDeadline() {
+      const now = new Date().getTime();
+      if (now >= DEADLINE) {
+        document.getElementById('formContent').classList.add('hidden');
+        document.getElementById('closedContainer').classList.remove('hidden');
+        return false;
+      }
+      return true;
+    }
+
+    // Chạy kiểm tra ngay khi mở trang
+    window.addEventListener('DOMContentLoaded', () => {
+      checkRegistrationDeadline();
+    });
 
     let selectedCombo = {
       id: 1,
@@ -267,6 +324,13 @@
     // Xử lý nộp form
     async function handleSubmit(e) {
       e.preventDefault();
+
+      // Kiểm tra chặn lại nếu khách bấm submit sau 23h
+      if (!checkRegistrationDeadline()) {
+        alert("Rất tiếc, thời hạn nhận học viên của khóa học đã kết thúc!");
+        return;
+      }
+
       const submitBtn = document.getElementById('submitBtn');
       submitBtn.disabled = true;
       submitBtn.innerText = "Đang xử lý...";
@@ -294,7 +358,6 @@
       };
 
       try {
-        // Gửi ngầm dữ liệu về Google Sheets API
         fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
@@ -302,14 +365,12 @@
           body: JSON.stringify(payload)
         });
 
-        // Tạo VietQR chuẩn Napas qua API công khai VietQR
         const qrUrl = `https://img.vietqr.io/image/TCB-19022423550011-compact2.png?amount=${selectedCombo.price}&addInfo=${encodeURIComponent(noiDungCK)}&accountName=HO%20HOANG%20HIEU`;
         
         document.getElementById('qrImage').src = qrUrl;
         document.getElementById('txtGiaTien').innerText = selectedCombo.price.toLocaleString('vi-VN') + " VNĐ";
         document.getElementById('txtNoiDung').innerText = noiDungCK;
 
-        // Bật Modal QR
         document.getElementById('qrModal').style.display = 'flex';
       } catch (err) {
         alert("Có lỗi xảy ra khi xử lý thông tin, vui lòng thử lại!");
